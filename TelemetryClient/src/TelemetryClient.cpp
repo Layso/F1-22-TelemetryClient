@@ -2,10 +2,45 @@
 #include <string>
 #include <winsock2.h>
 #include <Ws2tcpip.h>
+#include "types\struct\SPacketHeader.h"
+#include "types\enum\EPacket.h"
 #pragma comment(lib,"WS2_32")
 
 
 #define BUFFER_LEN 2048
+
+std::string GetPackedID(unsigned char PacketType) {
+	EPacket type = static_cast<EPacket>(PacketType);
+	switch (type) {
+		case EPacket::Motion:
+			return "Motion";
+		case EPacket::Session:
+			return "Session";
+		case EPacket::LapData:
+			return "LapData";
+		case EPacket::Event:
+			return "Event";
+		case EPacket::Participants:
+			return "Participants";
+		case EPacket::CarSetups:
+			return "CarSetups";
+		case EPacket::CarTelemetry:
+			return "CarTelemetry";
+		case EPacket::CarStatus:
+			return "CarStatus";
+		case EPacket::FinalClassification:
+			return "FinalClassification";
+		case EPacket::LobbyInfo:
+			return "LobbyInfo";
+		case EPacket::CarDamage:
+			return "CarDamage";
+		case EPacket::SessionHistory:
+			return "SessionHistory";
+		default:
+			return "None";
+	}
+}
+
 
 void TelemetryClient::CreateSocket() {
 	int iResult;
@@ -40,6 +75,8 @@ void TelemetryClient::CreateSocket() {
 
 	puts("Bind done");
 
+	SPacketHeader header;
+
 
 	while (1) {
 		fflush(stdout);
@@ -53,9 +90,11 @@ void TelemetryClient::CreateSocket() {
 			exit(EXIT_FAILURE);
 		}
 
+		memcpy(&header, buffer, sizeof(header));
+
 		//print details of the client/peer and the data received
 		//printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
-		printf("Received Data: %s\n", buffer);
+		printf("%d %d.%d Packet=%s Frame=%d\n", header.m_packetFormat, header.m_gameMajorVersion, header.m_gameMinorVersion, GetPackedID(header.m_packetId).c_str(), header.m_frameIdentifier);
 	}
 
 	/*

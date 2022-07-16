@@ -18,10 +18,16 @@
     <ClInclude Include="src\TelemetryClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\types\ETeam.h">
+    <ClInclude Include="src\types\enum\ETeam.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\types\EDriver.h">
+    <ClInclude Include="src\types\enum\EDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\types\struct\SPacketHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\types\enum\EPacket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

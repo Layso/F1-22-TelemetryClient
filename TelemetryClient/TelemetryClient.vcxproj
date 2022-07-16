@@ -20,8 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\TelemetryClient.h" />
-    <ClInclude Include="src\types\EDriver.h" />
-    <ClInclude Include="src\types\ETeam.h" />
+    <ClInclude Include="src\types\enum\EDriver.h" />
+    <ClInclude Include="src\types\enum\EPacket.h" />
+    <ClInclude Include="src\types\enum\ETeam.h" />
+    <ClInclude Include="src\types\struct\SPacketHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\TelemetryClient.cpp" />
